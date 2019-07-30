@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MyApplications</string>
+    <string name="version">Version: </string>
+</resources>
