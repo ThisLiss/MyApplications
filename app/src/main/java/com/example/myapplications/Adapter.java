@@ -13,32 +13,29 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
+public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>  {
 
-    private Context contextAd;
-    private test con;
+    private onAdapterListener onItem;
     private PackageManager pmA;
-    private List packagesA;
+    private List <ApplicationInfo> packagesA;
     private static int sizeA;
 
-    public Adapter(Context context, PackageManager pm, List packages, int size){
-        contextAd = context;
+    public Adapter(PackageManager pm, List packages){
         pmA = pm;
         packagesA = packages;
-        sizeA = size;
+        sizeA = packagesA.size();
     }
 
-
-    public interface test{
-        void item(int pos);
+    public interface onAdapterListener{
+        void onItemClick(int pos);
     }
 
     @Override
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
         Context context = recyclerView.getContext();
-        if(context instanceof test)
-            con = (test)context;
+        if(context instanceof onAdapterListener)
+            onItem = (onAdapterListener)context;
 
     }
 
@@ -46,9 +43,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
 
-        int layoutIdForListItem = R.layout.list_item;
+        int layoutIdForListItem = R.layout.list_item_app_info;
 
-        LayoutInflater inflater = LayoutInflater.from(contextAd);
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(layoutIdForListItem,parent,false);
 
         ViewHolder viewHolder = new ViewHolder(view);
@@ -79,18 +76,18 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    con.item(getAdapterPosition());
+                    onItem.onItemClick(getAdapterPosition());
                 }
             });
 
-            nameView = itemView.findViewById(R.id.app_name);
-            packageIndex= itemView.findViewById(R.id.app_package);
-            iconView = itemView.findViewById(R.id.app_icon);
+            nameView = itemView.findViewById(R.id.tvAppName);
+            packageIndex= itemView.findViewById(R.id.tvAppPackage);
+            iconView = itemView.findViewById(R.id.ivAppImage);
         }
 
 
         void bind(int listIndex){
-            ApplicationInfo app = (ApplicationInfo) packagesA.get(listIndex);
+            ApplicationInfo app = packagesA.get(listIndex);
             nameView.setText(app.loadLabel(pmA).toString());
             packageIndex.setText(app.packageName);
             iconView.setImageDrawable(app.loadIcon(pmA));

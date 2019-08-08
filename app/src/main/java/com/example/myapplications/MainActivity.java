@@ -15,10 +15,10 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements Adapter.test {
+public class MainActivity extends AppCompatActivity implements Adapter.onAdapterListener {
 
     private PackageManager pm;
-    private List packages;
+    private List <ApplicationInfo> packages;
 
     ImageView iconDialog;
     TextView textPack;
@@ -41,27 +41,26 @@ public class MainActivity extends AppCompatActivity implements Adapter.test {
 
         pm = MainActivity.this.getPackageManager();
         packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
-        int size = packages.size();
 
-        Adapter adapter = new Adapter(MainActivity.this, pm, packages, size);
+        Adapter adapter = new Adapter(pm, packages);
         numbersList.setAdapter(adapter);
 
     }
 
     @Override
-    public void item(int position) {
+    public void onItemClick(int position) {
 
                 LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
-                LinearLayout view = (LinearLayout) inflater.inflate(R.layout.for_dialog, null);
+                LinearLayout view = (LinearLayout) inflater.inflate(R.layout.dialog_app_info, null);
 
-                iconDialog = view.findViewById(R.id.imageView);
-                textName = view.findViewById(R.id.textName);
-                textPack = view.findViewById(R.id.textPackage);
-                textVer = view.findViewById(R.id.textVer);
-                textVerCode = view.findViewById(R.id.textVerCode);
+                iconDialog = view.findViewById(R.id.ivAppImageD);
+                textName = view.findViewById(R.id.tvAppNameD);
+                textPack = view.findViewById(R.id.tvAppPackageD);
+                textVer = view.findViewById(R.id.tvAppVersion);
+                textVerCode = view.findViewById(R.id.tvAppVersionCode);
 
 
-                app = (ApplicationInfo) packages.get(position);
+                app = packages.get(position);
 
                 try {
                     versionName = pm.getPackageInfo(app.packageName, 0).versionName;

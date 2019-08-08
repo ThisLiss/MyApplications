@@ -8,7 +8,7 @@
 
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/ivAppImageD"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="10dp"
@@ -18,7 +18,7 @@
         android:layout_gravity="center"/>
 
     <TextView
-        android:id="@+id/textName"
+        android:id="@+id/tvAppNameD"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -28,7 +28,7 @@
         tools:text="Name"/>
 
     <TextView
-        android:id="@+id/textPackage"
+        android:id="@+id/tvAppPackageD"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -46,14 +46,14 @@
         android:layout_gravity="center">
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/tvVersion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="17sp"
             android:text="@string/version" />
 
         <TextView
-            android:id="@+id/textVer"
+            android:id="@+id/tvAppVersion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -64,7 +64,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textVerCode"
+        android:id="@+id/tvAppVersionCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="17sp"
