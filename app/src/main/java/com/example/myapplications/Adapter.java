@@ -20,23 +20,15 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>  {
     private List <ApplicationInfo> packagesA;
     private static int sizeA;
 
-    public Adapter(PackageManager pm, List packages){
+    public Adapter(PackageManager pm, List packages, onAdapterListener onItem){
         pmA = pm;
         packagesA = packages;
         sizeA = packagesA.size();
+        this.onItem = onItem;
     }
 
     public interface onAdapterListener{
         void onItemClick(int pos);
-    }
-
-    @Override
-    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
-        super.onAttachedToRecyclerView(recyclerView);
-        Context context = recyclerView.getContext();
-        if(context instanceof onAdapterListener)
-            onItem = (onAdapterListener)context;
-
     }
 
     @NonNull

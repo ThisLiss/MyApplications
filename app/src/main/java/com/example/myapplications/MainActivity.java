@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements Adapter.onAdapter
         pm = MainActivity.this.getPackageManager();
         packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
 
-        Adapter adapter = new Adapter(pm, packages);
+        Adapter adapter = new Adapter(pm, packages, this);
         numbersList.setAdapter(adapter);
 
     }
